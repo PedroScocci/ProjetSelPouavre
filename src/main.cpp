@@ -1,7 +1,7 @@
 #include <LibRobus.h>
-#include <headers/Capteurs.h>
-#include <headers/FonctionsSuiveur.h>
 #include <headers/InfraRouge.h>
+#include <headers/CapteurDistance.h>
+#include <headers/FonctionsSuiveur.h>
 
 #define ROUGE 0
 #define VERT 1
@@ -44,20 +44,10 @@ void AvanceToutDroit(int distance)
 
 void setup()
 {
-  BoardInit();
-  SERVO_Disable(0);
-  delay(10);
-
-  pinMode(PIN_SUIVEUR, INPUT);
+  
 }
 
 void loop() 
 {
-  int infra = 0;
-
-  infra = capterInfra();
-
-  Serial.println(infra);
-
-  testTournerInfra(infra, RIGHT);
+ 
 }

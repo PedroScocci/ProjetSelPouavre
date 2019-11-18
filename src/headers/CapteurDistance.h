@@ -13,6 +13,7 @@ Librairie pour les capteurs des robots.
 // Defines
 #define PINDISTANCEHAUT 1
 #define PINDISTANCEBAS 0
+#define ValeurParDefaut 0
 
 const double tensionADistance[15][15] =
 {
