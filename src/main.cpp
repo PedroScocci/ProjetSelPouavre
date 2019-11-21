@@ -8,6 +8,11 @@
 #define BLEU 2
 #define JAUNE 3
 
+#define BOUTONROUGE 35
+#define BOUTONJAUNE 34
+#define BOUTONVERT  33
+#define BOUTONBLEU  32
+
 bool done = false;
 int i = 0;
 
