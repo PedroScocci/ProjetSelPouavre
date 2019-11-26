@@ -8,6 +8,8 @@ Librairie pour le capteur infrarouge.
 #define InfraRouge_H_
 
 #include "LibRobus.h"
+#include <headers/LCD.h>
+#include <headers/Movements.h>
 
 //Definitions
 #define Bouton1 -8161
@@ -20,14 +22,48 @@ int capterInfra(){
     int infra = 0;
     do{
         infra = REMOTE_read();
+        delay(50);
     }while(infra == 0);
     return infra;
 }
 
-void testTournerInfra(int infra, int direction){
-    MOTOR_SetSpeed(direction, 0.1);
-    delay(50);
-    MOTOR_SetSpeed(direction, 0);
+void test360Infra(){
+    rotate(1,360);
+    rotate(0,360);
+}
+
+void testInfra(){
+    int infra;
+    do
+    { 
+        infra = capterInfra();
+        Serial.print(infra);
+        if (infra == Bouton1)
+        {
+            LiquidCrystal_I2C lcd(0x27,16,2);
+            lcd.init();
+            lcd.backlight();
+            lcd.clear();
+
+            ecrirelcd("Test            ", "Infra           ");
+        }
+        else if (infra == Bouton2)
+        {
+            MOTOR_SetSpeed(0, 0.15);
+            MOTOR_SetSpeed(1, 0.15);
+            infra = 0;
+            do{
+                infra = capterInfra();
+                delay(10);
+            }while(infra != Bouton2);
+            MOTOR_SetSpeed(0, 0);
+            MOTOR_SetSpeed(1, 0);
+        }
+        else if (infra == Bouton3)
+        {
+            test360Infra();
+        }
+    }while(infra != Bouton5);
 }
 
 #endif

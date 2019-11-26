@@ -1,36 +1,30 @@
 #ifndef Servomoteur_H_
 #define Servomoteur_H_
 
-//#define ANGLEPINCE 25
-//#define ANGLEPINCE 40
+#include <LibRobus.h>
 
-void fermerPinces(int anglePince)
-{
-    SERVO_Enable(0);
-    for(int i = 0; i < anglePince; i++) {
-        SERVO_SetAngle(0, i);
+#define MOTEURDROITE 0
+#define MOTEURGAUCHE 1
+
+void fermerPinces(int moteur){
+    SERVO_Enable(moteur);
+    for(int i = 70; i < 0; i++) {
+        SERVO_SetAngle(moteur, i);
         delay(5);
-    }
+    };
+    SERVO_Disable(moteur);
     delay(1000);
-    if(anglePince == 25)
-    {
-        SERVO_Disable(0);
-    }   
 }
 
 // Ouvre les pinces
-void ouvrirPinces(int anglePince)
-{
-    SERVO_Enable(0);
-    for(int i = anglePince; i > 0; i--) {
-        SERVO_SetAngle(0, i);
+void ouvrirPinces(int moteur){
+    SERVO_Enable(moteur);
+    for(int i = 0; i > 70; i--) {
+        SERVO_SetAngle(moteur, i);
         delay(5);
     }
+    SERVO_Disable(moteur);
     delay(1000);
-    if(anglePince == 40)
-    {
-        SERVO_Disable(0);
-    }   
 }
 
 #endif 

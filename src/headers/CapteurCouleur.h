@@ -9,7 +9,8 @@ Librairie pour les capteurs des robots.
 
 // Includes
 #include <arduino.h>
-#include <Adafruit_TCS34725.h>
+//#include <Adafruit_TCS34725.h>
+#if 0
 
 void printColor (int);
 
@@ -64,6 +65,7 @@ Adafruit_TCS34725 CapteurCouleurInit()
   }
   return CapteurCouleur;
 } 
+
 
 void resetValeurCouleur ()
 {
@@ -154,6 +156,8 @@ void printColor(int color)
     Serial.println("=======================");
     Serial.println(Couleur[color]);
     Serial.println("=======================");
-} 
+}
+
+#endif
 
 #endif //LibRobus

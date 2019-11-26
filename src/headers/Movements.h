@@ -1,15 +1,19 @@
 #ifndef Movements_H_
 #define Movements_H_
 
-#include <headers/Servomoteur.h>
+#include <headers/FonctionsSuiveur.h>
+#include <headers/CapteurDistance.h>
 
 int pulsesToAccelerate (float speed);
 int pulsesToDecelerate(float speed);
 float chooseAccordingSpeed(int pulses);
 void decelerate ();
 void pid(float currentSpeed);
+int correct (float speed, int index);
+void scan();
+void followLine();
 
-float maxSpeed = 0.5;
+float maxSpeed = 0.2;
 float currentSpeed = 0;
 
 float wheelDiameter = 7.62;
@@ -37,89 +41,23 @@ const int decelerationPulses[10]=
     185
 };
 
-
-#if 1
-void forward(double suiveurLigne, double maxLigne, double minLigne) {
+void forward () {
   ENCODER_Reset(0);
   ENCODER_Reset(1);
   bool accelerate = true;
   float speed = 0;
-
-  double analogue = 0;
-
-  while(accelerate) 
-  {
+  while(accelerate) {
     speed += 0.1;
     if (speed > maxSpeed) speed = maxSpeed;
     currentSpeed = speed;
-    
-    if(suiveurLigne >= maxLigne || suiveurLigne < minLigne || (getDistance(PINDISTANCEBAS) <= 20 && getDistance(PINDISTANCEHAUT) <= 20))
-    {
-        accelerate = false;
-        decelerate();
-    }
-    else 
-    {
-      pid(currentSpeed);
-    } 
-    analogue = analogRead(A7);
-    Serial.println(analogue);
-
-    // Convertion valeur analogue (0 à 1023.0) en tension (0 à 5V)
-    suiveurLigne = analogue * (5.0 / 1023.0);
-
-    Serial.println(suiveurLigne);
-    delay(accelerationMsDelay); 
-   
-  #else
-  void forward(int temps) 
-  {
-  ENCODER_Reset(0);
-  ENCODER_Reset(1);
-  bool accelerate = true;
-  float speed = 0;
-  int i = 0;
-
-  while(accelerate) 
-  {
-    speed += 0.1;
-    if (speed > maxSpeed) speed = maxSpeed;
-    currentSpeed = speed;
-    
-    if(i == temps) 
-    {
+    if(getDistance(PINDISTANCEHAUT) <= 20) {
       accelerate = false;
       decelerate();
-    }
-    else 
-    {
+    }else {
       pid(currentSpeed);
     } 
     delay(accelerationMsDelay); 
-    i ++;
-    #endif
-
-    /*if(getDistance(PINDISTANCEBAS) <= 20 && getDistance(PINDISTANCEHAUT) >= 20 && ballon == false) 
-    {
-      accelerate = false;
-      ballon = true;
-      decelerate();
-    }
-
-    if(getDistance(PINDISTANCEBAS) <= 20 && getDistance(PINDISTANCEHAUT) <= 20) {
-      accelerate = false;
-      //ballon = false;
-      decelerate();
-    }
-    else 
-    {
-      pid(currentSpeed);
-    } 
-    delay(accelerationMsDelay); 
-    */
   }
-
-  //return ballon;
 }
 
 void backward (float distance) {
@@ -238,7 +176,7 @@ void rotate (int side, int angle) {
   MOTOR_SetSpeed(side, -0.2);
   MOTOR_SetSpeed(otherSide, 0.2);
  
-  while(encoder <pulses)
+  while(encoder < pulses)
   {
      encoder= (ENCODER_Read(side) * -1) + ENCODER_Read(otherSide) ;
   }
@@ -246,5 +184,74 @@ void rotate (int side, int angle) {
   MOTOR_SetSpeed(1, 0);
 }
 
+void followLine() {
+  bool accelerate = true;
+  scan();
+  Serial.println("ALLODSAd");
+  float speed = 0;
+  while(accelerate) {
+    speed += 0.1;
+    if (speed > maxSpeed) speed = maxSpeed;
+    currentSpeed = speed;
+    /*if(getDistance(PINDISTANCEHAUT) <= 20) {
+      
+      accelerate = false;
+      decelerate();
+    }else {*/
+      int voltage = getLineValue();
+      int j = correct(currentSpeed, getTensionIndex(voltage));
+      Serial.println(j);
+      if( j == 1) {
+        Serial.println("342354234234");
+        MOTOR_SetSpeed(1, currentSpeed);
+        MOTOR_SetSpeed(0, currentSpeed);
+      }else {
+        accelerate = false;
+      }
+    //}
+  }
+}
+
+void scan() {
+  bool found = false;
+  int voltage = getLineValue();
+  int index = getTensionIndex(voltage);
+  if(index == 5) {
+    found = true;
+  }
+  while(!found) {
+    rotate(0,23);
+    voltage = getLineValue();
+    index = getTensionIndex(voltage);
+    if(index == 5) {
+      found = true;
+    }else {
+      int count = 0;
+      while(count < 45 && !found) {
+        rotate(1,1);
+        voltage = getLineValue();
+        index = getTensionIndex(voltage);
+        if(index == 5) {
+          found = true;
+        }else {
+          count++;
+        }
+        if(count == 45) {
+          rotate(0,22);
+        }
+      }
+    }
+  }
+}
+
+int correct (float speed, int index) {
+  switch (index)
+  {
+    case 0:case 7: decelerate(); return 0; break;
+    case 1:case 4: rotate(1,1); return 1; break;
+    case 3:case 6: rotate(0,1); return 1; break;
+  }
+  return 1;
+} 
 
 #endif 

@@ -5,12 +5,13 @@ Librairie pour l'affichage de l'écran LCD.
 @version 1.0 14/11/2019
 */
 
-#include <LiquidCrystal_I2C.h>
+#include <LiquidCrystal_I2C/LiquidCrystal_I2C.h>
 #include <Wire.h>
+
+LiquidCrystal_I2C lcd(0x27,16,2);
 
 void ecrirelcd(char messagelcd1[], char messagelcd2[])
 {
-  LiquidCrystal_I2C lcd(0x27,16,2);
   lcd.init();
   lcd.backlight();
   lcd.clear();
@@ -28,4 +29,23 @@ void ecrirelcd(char messagelcd1[], char messagelcd2[])
   {
     lcd.print(messagelcd2[j]);
   }
+}
+
+void initialisationLCD()
+{
+  lcd.init();
+  lcd.backlight();
+  lcd.clear();
+
+  ecrirelcd("Bonjour         ","Mon nom est Sel ");
+  delay(3000);
+}
+
+void affichage()
+{
+  lcd.init();
+  lcd.backlight();
+  lcd.clear();
+
+  ecrirelcd("Veuillez choisir","InfraR SL Epice ");
 }
