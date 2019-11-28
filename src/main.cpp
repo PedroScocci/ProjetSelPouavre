@@ -1,19 +1,22 @@
 #include <LibRobus.h>
-#include <headers/InfraRouge.h>
-#include <headers/CapteurDistance.h>
-#include <headers/FonctionsSuiveur.h>
-#include <headers/Servomoteur.h>
+#include "headers/InfraRouge.h"
+#include "headers/CapteurDistance.h"
+#include "headers/FonctionsSuiveur.h"
+#include "headers/Servomoteur.h"
 
-#define ROUGE 0
-#define VERT 1
-#define BLEU 2
-#define JAUNE 3
+//Constante de direction du robot
+#define AVANT 0
+#define DROITE 1
+#define ARRIERE 2
+#define GAUCHE 3
 
+//Pin des boutons
 #define BOUTONROUGE 30
 #define BOUTONJAUNE 35
 #define BOUTONVERT  47
 #define BOUTONBLEU  41
 
+//Constante pour pressage du bouton
 #define APPUYER 0
 
 bool done = false;
