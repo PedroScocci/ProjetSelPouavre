@@ -1,6 +1,5 @@
 #include <LibRobus.h>
 #include <headers/InfraRouge.h>
-#include <headers/CapteurDistance.h>
 #include <headers/FonctionsSuiveur.h>
 #include <headers/Servomoteur.h>
 
@@ -10,8 +9,8 @@
 #define JAUNE 3
 
 #define BOUTONROUGE 30
-#define BOUTONJAUNE 35
-#define BOUTONVERT  47
+#define BOUTONVERT  35
+#define BOUTONJAUNE 47
 #define BOUTONBLEU  41
 
 #define APPUYER 0
@@ -108,7 +107,7 @@ void loop()
   if(APPUYER == digitalRead(BOUTONVERT))
   {
     ecrirelcd("      Epice     ","                ");
-    SERVO_Enable(MOTEURDROITE);
+    /*SERVO_Enable(MOTEURDROITE);
     delay(100);
     SERVO_SetAngle(MOTEURDROITE, 45);
     delay(100);
@@ -124,7 +123,8 @@ void loop()
     SERVO_Disable(MOTEURGAUCHE);
     delay(1000);
 
-    affichage();
+    affichage();*/
+    epice(MOTEURDROITE);
     digitalWrite(BOUTONVERT, 1);
   }
 

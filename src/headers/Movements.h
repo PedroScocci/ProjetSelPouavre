@@ -50,7 +50,7 @@ void forward () {
     speed += 0.1;
     if (speed > maxSpeed) speed = maxSpeed;
     currentSpeed = speed;
-    if(getDistance(PINDISTANCEHAUT) <= 20) {
+    if(getDistance(PINDISTANCEBAS) <= 20) {
       accelerate = false;
       decelerate();
     }else {

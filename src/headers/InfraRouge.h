@@ -10,6 +10,7 @@ Librairie pour le capteur infrarouge.
 #include "LibRobus.h"
 #include <headers/LCD.h>
 #include <headers/Movements.h>
+#include <headers/CapteurDistance.h>
 
 //Definitions
 #define Bouton1 -8161
@@ -62,6 +63,11 @@ void testInfra(){
         else if (infra == Bouton3)
         {
             test360Infra();
+        }
+        else if (infra == Bouton4)
+        {
+            Serial.println(getDistance(PINDISTANCEBAS));
+            ecrirelcd("Distance: ","                ");
         }
     }while(infra != Bouton5);
 }
