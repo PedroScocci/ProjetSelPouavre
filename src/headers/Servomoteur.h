@@ -6,36 +6,30 @@
 #define MOTEURDROITE 0
 #define MOTEURGAUCHE 1
 
-void fermerPinces(int moteur){
-    SERVO_Enable(moteur);
-    delay(100);
-    /*for(int i = 70; i < 0; i++) {
-        SERVO_SetAngle(moteur, i);
-        delay(5);
-    };*/
-    SERVO_SetAngle(moteur, 20);
-    delay(100);
-    SERVO_Disable(moteur);
-    delay(100);
-}
-
-void epice(int moteur)
+void epice(int moteur, int temps)
 {
     SERVO_Enable(moteur);
     delay(100);
-    SERVO_SetAngle(moteur, 0);
-    delay(100);
-    SERVO_Disable(moteur);
-    delay(100);
-}
-
-// Ouvre les pinces
-void ouvrirPinces(int moteur){
-    SERVO_Enable(moteur);
-    for(int i = 0; i > 70; i--) {
-        SERVO_SetAngle(moteur, i);
-        delay(5);
+    
+    if(moteur == MOTEURDROITE)
+    {
+        //Ouvrir la trape.
+        SERVO_SetAngle(moteur, 155);
     }
+    else if (moteur == MOTEURGAUCHE)
+    {
+        //Ouvrir la trape.
+        SERVO_SetAngle(moteur, 45);
+    }
+
+    //Temps d'ouverture en milisecondes.
+    delay(temps);
+
+    //Fermer la trape
+    SERVO_SetAngle(moteur, 81);
+    delay(1000);
+    
+    //Désactiver le moteur.
     SERVO_Disable(moteur);
     delay(1000);
 }
