@@ -1,19 +1,10 @@
 #include <LibRobus.h>
-#include <headers/InfraRouge.h>
-#include <headers/FonctionsSuiveur.h>
-#include <headers/Servomoteur.h>
+#include "headers/InfraRouge.h"
+#include "headers/CapteurDistance.h"
+#include "headers/FonctionsSuiveur.h"
+#include "headers/Servomoteur.h"
+#include "headers/CapteurDistance.h"
 
-#define ROUGE 0
-#define VERT 1
-#define BLEU 2
-#define JAUNE 3
-
-#define BOUTONROUGE 30
-#define BOUTONVERT  35
-#define BOUTONJAUNE 47
-#define BOUTONBLEU  41
-
-#define APPUYER 0
 
 bool done = false;
 int i = 0;
