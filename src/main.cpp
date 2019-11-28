@@ -4,21 +4,6 @@
 #include "headers/FonctionsSuiveur.h"
 #include "headers/Servomoteur.h"
 
-//Constante de direction du robot
-#define AVANT 0
-#define DROITE 1
-#define ARRIERE 2
-#define GAUCHE 3
-
-//Pin des boutons
-#define BOUTONROUGE 30
-#define BOUTONJAUNE 35
-#define BOUTONVERT  47
-#define BOUTONBLEU  41
-
-//Constante pour pressage du bouton
-#define APPUYER 0
-
 bool done = false;
 int i = 0;
 
