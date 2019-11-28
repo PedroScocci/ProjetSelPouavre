@@ -9,9 +9,9 @@ Librairie pour les boutons.
 
 //Pin des boutons
 #define BOUTONROUGE 30
-#define BOUTONJAUNE 35
-#define BOUTONVERT  47
+#define BOUTONVERT  35
 #define BOUTONBLEU  41
+#define BOUTONJAUNE 47
 
 //Constante pour pressage du bouton
 #define APPUYER 0

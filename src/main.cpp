@@ -5,7 +5,6 @@
 #include "headers/Servomoteur.h"
 #include "headers/CapteurDistance.h"
 
-
 bool done = false;
 int i = 0;
 
@@ -98,24 +97,32 @@ void loop()
   if(APPUYER == digitalRead(BOUTONVERT))
   {
     ecrirelcd("      Epice     ","                ");
-    /*SERVO_Enable(MOTEURDROITE);
+    SERVO_Enable(MOTEURDROITE);
     delay(100);
-    SERVO_SetAngle(MOTEURDROITE, 45);
-    delay(100);
+    /*for(int i = 40; i < 0; i++) {
+        SERVO_SetAngle(MOTEURDROITE, i);
+        delay(100);
+    };*/
+
+    SERVO_SetAngle(MOTEURDROITE, 0);
+    delay(1000);
+    SERVO_SetAngle(MOTEURDROITE, 40);
+    delay(1000);
 
     SERVO_Disable(MOTEURDROITE);
     delay(1000);
 
-    SERVO_Enable(MOTEURGAUCHE);
+    /*SERVO_Enable(MOTEURGAUCHE);
     delay(100);
     SERVO_SetAngle(MOTEURGAUCHE, 45);
     delay(100);
 
     SERVO_Disable(MOTEURGAUCHE);
-    delay(1000);
+    delay(1000);*/
 
-    affichage();*/
-    epice(MOTEURDROITE);
+    affichage();
+    /*epice(MOTEURDROITE);
+    fermerPinces(MOTEURDROITE);*/
     digitalWrite(BOUTONVERT, 1);
   }
 

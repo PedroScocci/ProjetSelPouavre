@@ -38,7 +38,6 @@ void initialisationLCD()
   lcd.backlight();
   lcd.clear();
 
-
   ecrirelcd("Bonjour         ","Mon nom est Sel ");
   delay(3000);
 }

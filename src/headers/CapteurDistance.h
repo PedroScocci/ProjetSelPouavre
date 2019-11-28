@@ -11,7 +11,6 @@ Librairie pour les capteurs des robots.
 #include <math.h>
 
 // Defines
-#define PINDISTANCEHAUT 1
 #define PINDISTANCEBAS 0
 #define ValeurParDefaut 0
 
