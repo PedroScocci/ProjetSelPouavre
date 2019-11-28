@@ -2,7 +2,6 @@
 #include "headers/InfraRouge.h"
 #include "headers/CapteurDistance.h"
 #include "headers/FonctionsSuiveur.h"
-#include "headers/Servomoteur.h"
 #include "headers/CapteurDistance.h"
 
 bool done = false;
@@ -59,7 +58,7 @@ void setup()
 
   initialisationLCD();
 
-  affichage();
+  //affichage();
 
   Serial.begin(9600);
   delay(100);
@@ -67,8 +66,9 @@ void setup()
 
 void loop() 
 { 
+  debutInfra();
   //Capteur infra-rouge
-  Serial.println(digitalRead(BOUTONROUGE));
+  /*Serial.println(digitalRead(BOUTONROUGE));
   Serial.println(digitalRead(BOUTONVERT));
   Serial.println(digitalRead(BOUTONBLEU));
   Serial.println(digitalRead(BOUTONJAUNE));
@@ -76,7 +76,7 @@ void loop()
   if(APPUYER == digitalRead(BOUTONROUGE))
   {
     Serial.println("Bouton Rouge");
-    ecrirelcd("   Infrarouge   ","                ");
+    ecrirelcd("   Infrarouge");
     testInfra();
 
     affichage();
@@ -103,7 +103,7 @@ void loop()
         SERVO_SetAngle(MOTEURDROITE, i);
         delay(100);
     };*/
-
+/*
     SERVO_SetAngle(MOTEURDROITE, 0);
     delay(1000);
     SERVO_SetAngle(MOTEURDROITE, 40);
@@ -119,11 +119,11 @@ void loop()
 
     SERVO_Disable(MOTEURGAUCHE);
     delay(1000);*/
-
+/*
     affichage();
     /*epice(MOTEURDROITE);
     fermerPinces(MOTEURDROITE);*/
-    digitalWrite(BOUTONVERT, 1);
+   /* digitalWrite(BOUTONVERT, 1);
   }
 
   //Affichage
@@ -136,5 +136,5 @@ void loop()
     affichage();
     digitalWrite(BOUTONBLEU, 1);
   }
-  delay(50);
+  delay(50);*/
 }
