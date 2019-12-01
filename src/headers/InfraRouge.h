@@ -24,23 +24,7 @@ Librairie pour le capteur infrarouge.
 #define ARRIERE 2
 #define GAUCHE 3
 
-//Variable globale
-//int *infra = new int;
-
-/*void delete_infra(){
-    //désalocation de la mêmoire du pointeur infra
-    delete infra;
-    infra = NULL;
-}*/
-
-void capterInfra(int* infra){
-    do{
-        *infra = REMOTE_read();
-        delay(50);
-    }while(*infra == 0);
-}
-
-int capterInfra2(){
+int capterInfra(){
     int infra = 0;
     do{
         infra = REMOTE_read();
@@ -54,7 +38,7 @@ void debutInfra(){
     int infra = 0;
 
     //Captage du rayon infrarouge
-    infra = capterInfra2();
+    infra = capterInfra();
     //Vers la place devant le robot
     if(infra == Bouton1){
         //followLine();
@@ -98,49 +82,6 @@ void debutInfra(){
         //followLine(); //DEVRAIT S'ARRÊTER APRÈS ÊTRE RENDU AU MILIEU
         rotate(0, 90);
     }
-}
-
-
-//TESTS DE L'AUDIT #2
-void test360Infra(){
-    rotate(1,360);
-    rotate(0,360);
-}
-
-void testInfra(){
-    int infra=0;
-    do
-    { 
-        infra = capterInfra2();
-        Serial.print(infra);
-        
-        if (infra == Bouton1)
-        {
-            LiquidCrystal_I2C lcd(0x27,16,2);
-            lcd.init();
-            lcd.backlight();
-            lcd.clear();
-
-            ecrirelcd("Test infra");
-        }
-        else if (infra == Bouton2)
-        {
-            MOTOR_SetSpeed(0, 0.15);
-            MOTOR_SetSpeed(1, 0.15);
-            infra = 0;
-            do{
-                infra = capterInfra2();
-                delay(10);
-            }while(infra != Bouton2);
-            MOTOR_SetSpeed(0, 0);
-            MOTOR_SetSpeed(1, 0);
-        }
-        else if (infra == Bouton3)
-        {
-            test360Infra();
-        }
-    }while(infra != Bouton5);
-    //delete_infra();
 }
 
 #endif

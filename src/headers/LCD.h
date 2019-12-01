@@ -15,7 +15,7 @@ void ecrirelcd(char messagelcd[])
   lcd.init();
   lcd.backlight();
   lcd.clear();
-  
+
   int i=0;
   int k=16;
 
@@ -27,22 +27,23 @@ void ecrirelcd(char messagelcd[])
       lcd.print(messagelcd[i]);
       i++;
     }
-  }
-  
-  else if (strlen(messagelcd)>17 && strlen(messagelcd)<33)
-  {
+  } else if (strlen(messagelcd)>17 && strlen(messagelcd)<33){
+
     lcd.setCursor(0,0);
-    for(int j=0;j<16;j++)
-    {
+    for(int j=0;j<16;j++){
       lcd.print(messagelcd[j]);
     }
-
+    
     lcd.setCursor(0,1);
     while(messagelcd[k]!='\0')
     {
       lcd.print(messagelcd[k]);
       k++;
     }
+
+  } else{
+    lcd.setCursor(0,0);
+    lcd.print("ERREUR DE TAILLE");
   }
 }
 

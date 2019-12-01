@@ -23,11 +23,6 @@ Librairie pour les boutons.
 int reponse = 0;
 
 int demandeAutreEpice(){
-    //Version 1
-    /*ecrirelcd("Voulez-vous une ","autre epice?    ");
-    delay(3000);
-    ecrirelcd("Rouge = Non     ","Vert = Oui      ");*/
-
     //Version 2
     rotate(1,180);
     delay(200);
@@ -42,7 +37,7 @@ int demandeAutreEpice(){
         }
     }while(reponse == 0);
     
-    ecrirelcd("R: SEL V: POIVREJ: SAFRAN B: AIL");
+    ecrirelcd("R:SEL  V:POIVREJ:ANIS  B:THYM");
     return reponse;
 }
 
