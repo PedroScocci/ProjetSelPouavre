@@ -4,12 +4,20 @@ Librairie pour l'affichage de l'écran LCD.
 @auteur Jean-Christophe Perreault
 @version 2.0 28/11/2019
 */
+#ifndef LCD_H_
+#define LCD_H_
 #include <string.h>
 #include <LiquidCrystal_I2C\LiquidCrystal_I2C.h>
 
 LiquidCrystal_I2C lcd(0x27,16,2);
 #define MAX_TAILLE_TEXTE 17
 
+//Prototypes des fonctions
+void ecrirelcd(char messagelcd[]);
+void initialisationLCD();
+void affichage();
+
+//Fonctions
 void ecrirelcd(char messagelcd[])
 {
   lcd.init();
@@ -63,3 +71,4 @@ void affichage()
 
   ecrirelcd("Veuillez choisir l'epice voulue");
 }
+#endif

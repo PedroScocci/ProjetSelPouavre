@@ -6,6 +6,7 @@
 #define MOTEURDROITE 0
 #define MOTEURGAUCHE 1
 
+//Fonction
 void epice(int moteur, int temps)
 {
     SERVO_Enable(moteur);

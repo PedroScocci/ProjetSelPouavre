@@ -1,28 +1,36 @@
 /*
 Projet S1 2019
 Librairie pour le suiveur de ligne.
-@auteur Pedro Maria Scoccimarro
+@auteur Maxime Archer
 @version 1.0 22/10/2019
 */
 #ifndef FonctionsSuiveur_H_
 #define FonctionsSuiveur_H_
 
-#define PIN_SUIVEUR A7  //À CHANGER POUR LA BONNE PIN
+#define PIN_SUIVEUR A7
 
 int getIndexByRange (float voltage);
 
 float tensionSuiveurLigne[8] =  //to do  
 {
   0,
-  0.66, // gauche -> jaune
-  1.33, // centre -> mauve
-  2.66, // droite -> bleu
-  2.00, // G + C
+  0.65, // droite -> jaune
+  1.31, // centre -> turquoise
+  2.66, // gauche -> mauve
+  1.97, // D + C
   3.32, // G + D
   3.99, // C + D
   4.66, // G + C + D
 };
 
+int testcount = 0; // a enlever
+
+//Prototype des fonctions
+float getLineValue();
+int getTensionIndex(float voltage);
+int getIndexByRange (float voltage);
+
+//Fonctions
 float getLineValue()
 {
     double analog = analogRead(PIN_SUIVEUR);
@@ -30,6 +38,17 @@ float getLineValue()
 }
 
 int getTensionIndex(float voltage) {
+    // a enlever quand le suiveur est correct
+    if(testcount < 100) {
+        delay(20);
+        testcount++;
+        return 5;
+    }else {
+        testcount = 0;
+        return 7;
+    }
+
+
     for (int i = 0; i < 8; i++) {
         if(tensionSuiveurLigne[i] == voltage) {
             return i;

@@ -3,16 +3,19 @@
 
 #include "headers/FonctionsSuiveur.h"
 #include "headers/CapteurDistance.h"
+#include "headers/LCD.h"
 
+//Prototypes des fonctions
 int pulsesToAccelerate (float speed);
 int pulsesToDecelerate(float speed);
 float chooseAccordingSpeed(int pulses);
 void decelerate ();
 void pid(float currentSpeed);
-int correct (float speed, int index);
+int correct (int index);
 void scan();
 void followLine();
 
+//Variables globale
 float maxSpeed = 0.2;
 float currentSpeed = 0;
 
@@ -26,7 +29,8 @@ bool searching = false;
 bool isBackward = false;
 
 int accelerationMsDelay = 100; //25 or higher (tenir compte que le maximum de boucle est 10)
-
+ 
+ //Constantes globale
 const int decelerationPulses[10]=
 {
     0,
@@ -41,6 +45,7 @@ const int decelerationPulses[10]=
     185
 };
 
+//Fonctions
 void forward () {
   ENCODER_Reset(0);
   ENCODER_Reset(1);
@@ -186,29 +191,34 @@ void rotate (int side, int angle) {
 
 void followLine() {
   bool accelerate = true;
-  scan();
-  Serial.println("ALLODSAd");
+  bool stopped = false;
+  //scan();
   float speed = 0;
   while(accelerate) {
     speed += 0.1;
     if (speed > maxSpeed) speed = maxSpeed;
-    currentSpeed = speed;
-    /*if(getDistance(PINDISTANCEHAUT) <= 20) {
-      
-      accelerate = false;
+    if(getDistance(PINDISTANCEBAS) <= 20) {
       decelerate();
-    }else {*/
+      currentSpeed = 0;
+      if(!stopped) {
+        stopped = true;
+        ecrirelcd("    OBSTACLE        DETECTE!!");
+      }
+    }else {
+      if(stopped) {
+        stopped = false;
+        ecrirelcd("");
+      }
+      currentSpeed = speed;
       int voltage = getLineValue();
-      int j = correct(currentSpeed, getTensionIndex(voltage));
-      Serial.println(j);
+      int j = correct(getTensionIndex(voltage));
       if( j == 1) {
-        Serial.println("342354234234");
         MOTOR_SetSpeed(1, currentSpeed);
         MOTOR_SetSpeed(0, currentSpeed);
       }else {
         accelerate = false;
       }
-    //}
+    }
   }
 }
 
@@ -244,7 +254,7 @@ void scan() {
   }
 }
 
-int correct (float speed, int index) {
+int correct (int index) {
   switch (index)
   {
     case 0:case 7: decelerate(); return 0; break;
@@ -254,4 +264,4 @@ int correct (float speed, int index) {
   return 1;
 } 
 
-#endif 
+#endif

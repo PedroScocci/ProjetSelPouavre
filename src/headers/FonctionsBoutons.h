@@ -22,40 +22,25 @@ Librairie pour les boutons.
 //Varaible globale pour réponses des fonctions des boutons
 int reponse = 0;
 
-int demandeAutreEpice(){
-    //Version 2
-    rotate(1,180);
-    delay(200);
-    ecrirelcd("Plus d'epices?  R = Non  V = Oui");
+//Prototypes des fonctions
+void debutBoutons();
+int demandeAutreEpice();
 
-    reponse = 0;
-    do{
-        if(APPUYER == digitalRead(BOUTONROUGE)){
-            reponse = FIN;
-        }else if(APPUYER == digitalRead(BOUTONVERT)){
-            reponse = RECOMMENCER;
-        }
-    }while(reponse == 0);
-    
-    ecrirelcd("R:SEL  V:POIVREJ:ANIS  B:THYM");
-    return reponse;
-}
-
+//Fonctions
 void debutBoutons(){
     //Message de bienvenu
     ecrirelcd("Bonjour mon nom est SEL");
-    delay(3000);
+    delay(1500);
     
     reponse = 0;
     
     //Message informatif
-    ecrirelcd("Veuillez choisir une epice");
+    ecrirelcd("Veuillez choisirune epice");
     delay(2000);
-    ecrirelcd("R: SEL V: POIVREJ: SAFRAN B: AIL");
+    ecrirelcd("R:SEL     J:ANISV:POIVRE  B:THYM");
     do{
         //Choix de l'épice
         if(APPUYER == digitalRead(BOUTONROUGE)){
-            Serial.println("Bouton Rouge");
             ecrirelcd("Distribution de: SEL");
             delay(100);
             rotate(0,180);
@@ -65,8 +50,7 @@ void debutBoutons(){
             reponse = demandeAutreEpice();
     
         }else if(APPUYER == digitalRead(BOUTONVERT)){
-            Serial.println("Bouton Rouge");
-            ecrirelcd("Distribution de: POIVRE(RIP)");
+            ecrirelcd("Distribution de: POIVRE (RIP)");
             delay(100);
             rotate(0,180);
             delay(500);
@@ -75,8 +59,7 @@ void debutBoutons(){
             reponse = demandeAutreEpice();
 
         }else if(APPUYER == digitalRead(BOUTONJAUNE)){
-            Serial.println("Bouton Rouge");
-            ecrirelcd("Distribution de: SAFRAN");
+            ecrirelcd("Distribution de: ANIS");
             delay(100);
             rotate(1,180);
             delay(500);
@@ -85,8 +68,7 @@ void debutBoutons(){
             reponse = demandeAutreEpice();
 
         }else if(APPUYER == digitalRead(BOUTONBLEU)){
-            Serial.println("Bouton Rouge");
-            ecrirelcd("Distribution de: AIL");   
+            ecrirelcd("Distribution de: THYM");   
             delay(100);
             rotate(1,180);
             delay(500);
@@ -96,5 +78,23 @@ void debutBoutons(){
 
         }
     }while(reponse != FIN);
+    ecrirelcd("");
 }
 
+int demandeAutreEpice(){
+    rotate(1,180);
+    delay(200);
+    ecrirelcd("Plus d'epices?  R = Non  V = Oui");
+
+    reponse = 0;
+    do{
+        if(APPUYER == digitalRead(BOUTONROUGE)){
+            reponse = FIN;
+        }else if(APPUYER == digitalRead(BOUTONVERT)){
+            ecrirelcd("R:SEL     J:ANISV:POIVRE  B:THYM");
+            reponse = RECOMMENCER;
+        }
+    }while(reponse == 0);
+
+    return reponse;
+}

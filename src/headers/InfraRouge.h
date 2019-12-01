@@ -24,6 +24,11 @@ Librairie pour le capteur infrarouge.
 #define ARRIERE 2
 #define GAUCHE 3
 
+//Prototype des fonctions
+void debutInfra();
+int capterInfra();
+
+//Fonctions
 int capterInfra(){
     int infra = 0;
     do{
@@ -41,45 +46,44 @@ void debutInfra(){
     infra = capterInfra();
     //Vers la place devant le robot
     if(infra == Bouton1){
-        //followLine();
+        followLine();
         debutBoutons();
         // DEVRAIT AVOIR FAIT UN 180
         rotate(1, 180);
-        delay(1000);
-        //followLine(); //DEVRAIT S'ARRÊTER APRÈS ÊTRE RENDU AU MILIEU
+        delay(500);
+        followLine(); //DEVRAIT S'ARRÊTER APRÈS ÊTRE RENDU AU MILIEU
         rotate(0, 180);
     }
     //Vers la droite du robot
     else if(infra == Bouton2){
         rotate(1, 90);
-        //followLine();
+        followLine();
         debutBoutons();
         // DEVRAIT AVOIR FAIT UN 180
         rotate(1,180);
-        delay(1000);
-        //followLine();   //DEVRAIT S'ARRÊTER APRÈS ÊTRE RENDU AU MILIEU
+        delay(500);
+        followLine();   //DEVRAIT S'ARRÊTER APRÈS ÊTRE RENDU AU MILIEU
         rotate(1, 90);
     }
     //Vers l'arrière du robot
     else if(infra == Bouton3){
         rotate(1, 180);
-        //followLine();
+        followLine();
         debutBoutons();
-        delay(1000);
+        delay(500);
         // DEVRAIT AVOIR FAIT UN 180
         rotate(1,180);
-        
-        //followLine(); //DEVRAIT S'ARRÊTER APRÈS ÊTRE RENDU AU MILIEU
+        followLine(); //DEVRAIT S'ARRÊTER APRÈS ÊTRE RENDU AU MILIEU
     }
     //Vers la gauche du robot
     else if(infra == Bouton4){
         rotate(0, 90);
-        //followLine();
+        followLine();
         debutBoutons();
         // DEVRAIT AVOIR FAIT UN 180
         rotate(1,180);
-        delay(1000);
-        //followLine(); //DEVRAIT S'ARRÊTER APRÈS ÊTRE RENDU AU MILIEU
+        delay(500);
+        followLine(); //DEVRAIT S'ARRÊTER APRÈS ÊTRE RENDU AU MILIEU
         rotate(0, 90);
     }
 }
