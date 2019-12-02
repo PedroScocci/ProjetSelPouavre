@@ -33,6 +33,7 @@ const double tensionADistance[15][15] =
   {0.39, 80},
 };
 
+//Fonction
 double getDistance(int capteurChoisi)
 {
   // Initialisation des valeurs par defaut.
