@@ -42,10 +42,19 @@ void setup()
 {
   BoardInit();
 
+  //Fermer les trapes.
+  SERVO_Enable(MOTEURDROITE);
+  delay(10);
+  SERVO_Enable(MOTEURGAUCHE);
+  delay(10);
+  SERVO_SetAngle(MOTEURDROITE, 81);
+  delay(100);
+  SERVO_SetAngle(MOTEURGAUCHE, 81);
+  delay(100);
   SERVO_Disable(MOTEURDROITE);
-  delay(100);
+  delay(10);
   SERVO_Disable(MOTEURGAUCHE);
-  delay(100);
+  delay(10);
 
   pinMode(INPUT_PULLUP, BOUTONROUGE);
   pinMode(INPUT_PULLUP, BOUTONJAUNE);
@@ -57,7 +66,7 @@ void setup()
   digitalWrite(BOUTONVERT, 1);
   digitalWrite(BOUTONJAUNE, 1);
 
-  initialisationLCD();
+  //initialisationLCD();
 
   affichage();
 
@@ -97,32 +106,11 @@ void loop()
   if(APPUYER == digitalRead(BOUTONVERT))
   {
     ecrirelcd("      Epice     ","                ");
-    SERVO_Enable(MOTEURDROITE);
-    delay(100);
-    /*for(int i = 40; i < 0; i++) {
-        SERVO_SetAngle(MOTEURDROITE, i);
-        delay(100);
-    };*/
-
-    SERVO_SetAngle(MOTEURDROITE, 0);
-    delay(1000);
-    SERVO_SetAngle(MOTEURDROITE, 40);
-    delay(1000);
-
-    SERVO_Disable(MOTEURDROITE);
-    delay(1000);
-
-    /*SERVO_Enable(MOTEURGAUCHE);
-    delay(100);
-    SERVO_SetAngle(MOTEURGAUCHE, 45);
-    delay(100);
-
-    SERVO_Disable(MOTEURGAUCHE);
-    delay(1000);*/
+    
+    epice(MOTEURDROITE, 100);
+    epice(MOTEURGAUCHE, 100);
 
     affichage();
-    /*epice(MOTEURDROITE);
-    fermerPinces(MOTEURDROITE);*/
     digitalWrite(BOUTONVERT, 1);
   }
 
