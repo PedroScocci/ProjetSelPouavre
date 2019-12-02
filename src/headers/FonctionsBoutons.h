@@ -14,6 +14,13 @@ Librairie pour les boutons.
 #define BOUTONBLEU  41
 #define BOUTONJAUNE 35
 
+//Definitions des boutons rouges
+#define Bouton1 -8161
+#define Bouton2 -16321
+#define Bouton3 -14281
+#define Bouton4 -12241
+#define Bouton5 -4081
+
 //Constante pour pressage du bouton
 #define APPUYER 0
 #define RECOMMENCER 1
@@ -36,8 +43,9 @@ void debutBoutons(){
     
     //Message informatif
     ecrirelcd("Veuillez choisirune epice");
-    delay(2000);
+    delay(1500);
     ecrirelcd("R:SEL     J:ANISV:POIVRE  B:THYM");
+    delay(10);
     do{
         //Choix de l'épice
         if(APPUYER == digitalRead(BOUTONROUGE)){
@@ -77,8 +85,12 @@ void debutBoutons(){
             reponse = demandeAutreEpice();
 
         }
+        else if((signed int) REMOTE_read() == Bouton5)
+        {
+            reponse = FIN;
+        }
     }while(reponse != FIN);
-    ecrirelcd("");
+    initialisationLCD();
 }
 
 int demandeAutreEpice(){

@@ -16,19 +16,28 @@ void epice(int moteur, int temps)
     {
         //Ouvrir la trape.
         SERVO_SetAngle(moteur, 155);
+        
+        //Temps d'ouverture en milisecondes.
+        delay(temps);
+
+        //Fermer la trape
+        SERVO_SetAngle(moteur, 81);
+        delay(1000);
     }
     else if (moteur == MOTEURGAUCHE)
     {
         //Ouvrir la trape.
         SERVO_SetAngle(moteur, 45);
+
+        //Temps d'ouverture en milisecondes.
+        delay(temps);
+
+        //Fermer la trape
+        SERVO_SetAngle(moteur, 91);
+        delay(1000);
     }
 
-    //Temps d'ouverture en milisecondes.
-    delay(temps);
-
-    //Fermer la trape
-    SERVO_SetAngle(moteur, 81);
-    delay(1000);
+    
     
     //Désactiver le moteur.
     SERVO_Disable(moteur);

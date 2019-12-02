@@ -12,7 +12,7 @@ void setup()
   delay(10);
   SERVO_SetAngle(MOTEURDROITE, 81);
   delay(100);
-  SERVO_SetAngle(MOTEURGAUCHE, 81);
+  SERVO_SetAngle(MOTEURGAUCHE, 91);
   delay(100);
   SERVO_Disable(MOTEURDROITE);
   delay(10);
@@ -29,7 +29,7 @@ void setup()
   digitalWrite(BOUTONVERT, 1);
   digitalWrite(BOUTONJAUNE, 1);
 
-  //initialisationLCD();
+  initialisationLCD();
 
   delay(100);
 }

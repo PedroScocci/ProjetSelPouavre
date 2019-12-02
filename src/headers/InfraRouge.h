@@ -11,13 +11,6 @@ Librairie pour le capteur infrarouge.
 #include "headers/Movements.h"
 #include "headers/FonctionsBoutons.h"
 
-//Definitions
-#define Bouton1 -8161
-#define Bouton2 -16321
-#define Bouton3 -14281
-#define Bouton4 -12241
-#define Bouton5 -4081
-
 //Constante de direction du robot
 #define AVANT 0
 #define DROITE 1

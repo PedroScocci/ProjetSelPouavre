@@ -58,7 +58,7 @@ void ecrirelcd(char messagelcd[])
 void initialisationLCD()
 {
   lcd.init();
-  lcd.backlight();
+  lcd.noBacklight();
   lcd.clear();
 }
 
