@@ -1,8 +1,5 @@
 #include <LibRobus.h>
 #include "headers/InfraRouge.h"
-#include "headers/CapteurDistance.h"
-#include "headers/FonctionsSuiveur.h"
-#include "headers/CapteurDistance.h"
 
 void setup()
 {
