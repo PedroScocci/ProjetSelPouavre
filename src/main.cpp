@@ -10,9 +10,9 @@ void setup()
   delay(10);
   SERVO_Enable(MOTEURGAUCHE);
   delay(10);
-  SERVO_SetAngle(MOTEURDROITE, 81);
+  SERVO_SetAngle(MOTEURDROITE, POSINITDROITE);
   delay(100);
-  SERVO_SetAngle(MOTEURGAUCHE, 91);
+  SERVO_SetAngle(MOTEURGAUCHE, POSINITGAUCHE);
   delay(100);
   SERVO_Disable(MOTEURDROITE);
   delay(10);
@@ -23,6 +23,10 @@ void setup()
   pinMode(INPUT_PULLUP, BOUTONJAUNE);
   pinMode(INPUT_PULLUP, BOUTONVERT);
   pinMode(INPUT_PULLUP, BOUTONBLEU);
+
+  pinMode(INPUT, PIN_SUIVEUR1);
+  pinMode(INPUT, PIN_SUIVEUR2);
+  pinMode(INPUT, PIN_SUIVEUR3);
 
   digitalWrite(BOUTONROUGE, 1);
   digitalWrite(BOUTONBLEU, 1);

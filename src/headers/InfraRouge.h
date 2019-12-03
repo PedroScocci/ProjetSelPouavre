@@ -45,6 +45,8 @@ void debutInfra(){
         rotate(1, 180);
         delay(500);
         followLine(); //DEVRAIT S'ARRÊTER APRÈS ÊTRE RENDU AU MILIEU
+        delay(100);
+        forward();
         rotate(0, 180);
     }
     //Vers la droite du robot
@@ -56,6 +58,8 @@ void debutInfra(){
         rotate(1,180);
         delay(500);
         followLine();   //DEVRAIT S'ARRÊTER APRÈS ÊTRE RENDU AU MILIEU
+        delay(50);
+        forward();
         rotate(1, 90);
     }
     //Vers l'arrière du robot
@@ -67,6 +71,8 @@ void debutInfra(){
         // DEVRAIT AVOIR FAIT UN 180
         rotate(1,180);
         followLine(); //DEVRAIT S'ARRÊTER APRÈS ÊTRE RENDU AU MILIEU
+        delay(50);
+        forward();
     }
     //Vers la gauche du robot
     else if(infra == Bouton4){
@@ -77,6 +83,8 @@ void debutInfra(){
         rotate(1,180);
         delay(500);
         followLine(); //DEVRAIT S'ARRÊTER APRÈS ÊTRE RENDU AU MILIEU
+        delay(50);
+        forward();
         rotate(0, 90);
     }
 }
