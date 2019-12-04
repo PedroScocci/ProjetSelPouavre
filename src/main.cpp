@@ -19,19 +19,14 @@ void setup()
   SERVO_Disable(MOTEURGAUCHE);
   delay(10);
 
-  pinMode(INPUT_PULLUP, BOUTONROUGE);
-  pinMode(INPUT_PULLUP, BOUTONJAUNE);
-  pinMode(INPUT_PULLUP, BOUTONVERT);
-  pinMode(INPUT_PULLUP, BOUTONBLEU);
+  pinMode(BOUTONROUGE, INPUT_PULLUP);
+  pinMode(BOUTONJAUNE, INPUT_PULLUP);
+  pinMode(BOUTONVERT, INPUT_PULLUP);
+  pinMode(BOUTONBLEU, INPUT_PULLUP);
 
-  pinMode(INPUT, PIN_SUIVEUR1);
-  pinMode(INPUT, PIN_SUIVEUR2);
-  pinMode(INPUT, PIN_SUIVEUR3);
-
-  digitalWrite(BOUTONROUGE, 1);
-  digitalWrite(BOUTONBLEU, 1);
-  digitalWrite(BOUTONVERT, 1);
-  digitalWrite(BOUTONJAUNE, 1);
+  pinMode(PIN_SUIVEUR1, INPUT);
+  pinMode(PIN_SUIVEUR2, INPUT);
+  pinMode(PIN_SUIVEUR3, INPUT);
 
   initialisationLCD();
 

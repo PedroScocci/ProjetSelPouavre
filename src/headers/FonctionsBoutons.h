@@ -9,10 +9,10 @@ Librairie pour les boutons.
 #include "headers/Servomoteur.h"
 
 //Pin des boutons
-#define BOUTONROUGE 30
-#define BOUTONVERT  47
-#define BOUTONBLEU  41
-#define BOUTONJAUNE 35
+#define BOUTONROUGE A9  //30  Rouge
+#define BOUTONVERT  A8 //47  Turquoise
+#define BOUTONBLEU  A13 //41  Mauve
+#define BOUTONJAUNE A11 //35  Jaune
 
 //Definitions des boutons rouges
 #define Bouton1 -8161
