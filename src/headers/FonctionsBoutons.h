@@ -55,7 +55,6 @@ void debutBoutons(){
             delay(500);
             epice(0,100);
             delay(500);
-            //digitalWrite(BOUTONROUGE, 1);
             reponse = demandeAutreEpice();
         }else if(APPUYER == digitalRead(BOUTONVERT)){
             ecrirelcd("Distribution de: POIVRE (RIP)");
@@ -64,7 +63,6 @@ void debutBoutons(){
             delay(500);
             epice(0,100);
             delay(500);
-            //digitalWrite(BOUTONVERT, 1);
             reponse = demandeAutreEpice();
          }else if(APPUYER == digitalRead(BOUTONJAUNE)){
             ecrirelcd("Distribution de: ANIS");
@@ -73,7 +71,6 @@ void debutBoutons(){
             delay(500);
             epice(1,100);
             delay(500);
-            //digitalWrite(BOUTONJAUNE, 1);
             reponse = demandeAutreEpice();
         }else if(APPUYER == digitalRead(BOUTONBLEU)){
             ecrirelcd("Distribution de: THYM");   
@@ -82,7 +79,6 @@ void debutBoutons(){
             delay(500);
             epice(1,100);
             delay(500);
-            //digitalWrite(BOUTONBLEU, 1);
             reponse = demandeAutreEpice();
         }
         else if((signed int) REMOTE_read() == Bouton5)
@@ -108,8 +104,5 @@ int demandeAutreEpice(){
             reponse = RECOMMENCER;
         }
     }while(reponse == 0);
-    digitalWrite(BOUTONROUGE, 1);
-    digitalWrite(BOUTONVERT, 1);
-
     return reponse;
 }
