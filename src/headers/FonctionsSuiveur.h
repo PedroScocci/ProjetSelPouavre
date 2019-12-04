@@ -1,13 +1,11 @@
 /*
 Projet S1 2019
 Librairie pour le suiveur de ligne.
-@auteur Maxime Archer
-@version 1.0 22/10/2019
+@auteur Jérémy Chenard
+@version 1.0 03/11/2019
 */
 #ifndef FonctionsSuiveur_H_
 #define FonctionsSuiveur_H_
-
-int getIndexByRange (float voltage);
 
 float tensionSuiveurLigne[8] =  //to do  
 {
@@ -45,13 +43,6 @@ float getLineValue(int pinAnal)
 
 int getTensionIndex(float voltage)
 {
-    
-    /*for (int i = 0; i < 8; i++) {
-        if(tensionSuiveurLigne[i] == voltage) {
-            return i;
-        } 
-    }
-    */
     int iOui = 0;
     int IndexVolt = 0;
     int IndexVolt2 = 0;

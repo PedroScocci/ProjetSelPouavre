@@ -1,3 +1,9 @@
+/*
+Projet S1 2019
+Librairie pour le capteur infrarouge.
+@auteur Jérémy Chenard
+@version 1.0 03/11/2019
+*/
 #ifndef Movements_H_
 #define Movements_H_
 
@@ -17,7 +23,6 @@ int pulsesToDecelerate(float speed);
 float chooseAccordingSpeed(int pulses);
 void decelerate ();
 void pid(float currentSpeed);
-int correct (int index);
 int scan();
 void followLine();
 
@@ -55,7 +60,6 @@ const int decelerationPulses[10]=
 void forward () {
   ENCODER_Reset(0);
   ENCODER_Reset(1);
-  //bool accelerate = true;
   float speed = 0;
   int temps = 0;
   //13 secondes.
@@ -64,7 +68,6 @@ void forward () {
     if (speed > maxSpeed) speed = maxSpeed;
     currentSpeed = speed;
     if(getDistance(PINDISTANCEBAS) <= 20) {
-      //accelerate = false;
       decelerate();
     }else {
       pid(currentSpeed);
@@ -86,11 +89,9 @@ void backward (float distance) {
   distanceInPulses = (long) pulsesPerCm * (long) distance;
   while(accelerate) {
     speed -= 0.1;
-   // if (speed < maxSpeed * -1) speed = maxSpeed * -1;
-    if (speed < maxSpeed * 1) speed = maxSpeed * 1;
+    if (speed < maxSpeed * -1) speed = maxSpeed * -1;
     currentSpeed = speed;
-    //decelerationPulses = pulsesToDecelerate((currentSpeed * -1)) * 100 / accelerationMsDelay;
-    decelerationPulses = pulsesToDecelerate((currentSpeed * 1)) * 100 / accelerationMsDelay;
+    decelerationPulses = pulsesToDecelerate((currentSpeed * -1)) * 100 / accelerationMsDelay;
     if(ENCODER_Read(0) * -1 > distanceInPulses - decelerationPulses) {
       accelerate = false;
       decelerate();
@@ -104,21 +105,7 @@ void backward (float distance) {
 void decelerate () {
   ENCODER_Reset(0);
   ENCODER_Reset(1);
-  /*
-  while (currentSpeed != 0) {
-    if(isBackward) {
-      currentSpeed = currentSpeed + 0.1;
-      if(currentSpeed >= 0) currentSpeed = 0;
-      pid(currentSpeed);
-    }else { 
-      currentSpeed = currentSpeed - 0.1;
-      if(currentSpeed <= 0) currentSpeed = 0;
-      pid(currentSpeed);
-    }
-    delay(accelerationMsDelay);
-  } 
-  isBackward = false; 
-  */
+
   MOTOR_SetSpeed(0, 0);
   MOTOR_SetSpeed(1, 0);
 }
@@ -228,28 +215,11 @@ void followLine() {
         initialisationLCD();
       }
       currentSpeed = speed;
-      //int voltage = getLineValue();
-      //int j = correct(getTensionIndex(voltage));
       int j = scan();
       if( j == 1) {
         MOTOR_SetSpeed(1, currentSpeed);
         MOTOR_SetSpeed(0, currentSpeed);
         delay(50);
-      }
-      else if (j == 2)
-      {
-       
-        MOTOR_SetSpeed(1, currentSpeed);
-        MOTOR_SetSpeed(0, currentSpeed);
-        delay(100);
-      }
-      else if (j == 3)
-      {
-        //turn(0,1);
-        //delay(10);
-        MOTOR_SetSpeed(1, currentSpeed);
-        MOTOR_SetSpeed(0, currentSpeed);
-        delay(100);
       }
       else {
         accelerate = false;
@@ -279,7 +249,7 @@ int scan() {
       base = 5;
       voltage2 = analogRead(PIN_SUIVEUR2);
       delay(10);
-      //do{
+
       while(voltage2 > 3){
         if(direct == 0){
           rotate(direct,base);
@@ -293,22 +263,10 @@ int scan() {
           base++;
         }
         delay(50);
-        //voltage1 = analogRead(PIN_SUIVEUR1);
+
         voltage2 = analogRead(PIN_SUIVEUR2);
-        //voltage3 = analogRead(PIN_SUIVEUR3);        
-     // }while(voltage1 > 3 && voltage2 > 3 && voltage3 > 3);
      }
-          
-     /*if (direct == 0)
-     {
-        turn(1,5);
-        delay(10);
-     }
-     else
-     {
-        turn(0,5);
-        delay(10);
-     }*/
+
      retour = 1;
      found = true;
     }
@@ -350,185 +308,10 @@ int scan() {
     }
     //Seulement centre
     else if(voltage1 < 3 && voltage2 > 3 && voltage3 < 3){
-     // turn(1,1);
       found = true;
       retour = 1;
     }
-    //delay(50);
   }
   return retour;
-
-
-    //Si milieu voit noir
-    /*if(voltage2 < 3)
-    {
-      //Si droite voit noir, mais pas gauche
-      if((voltage1 < 3)&&(voltage3 > 3))
-      {
-        //Torne à droite
-        rotate(0, 1);
-      }
-      //Si gauche voit noir, mais pas droite
-      if((voltage3 < 3)&&(voltage1 > 3))
-      {
-        //Torne à gauche
-        rotate(1, 1);
-      }
-      //Si les deux voit blan
-      if((voltage3 > 3)&&(voltage1 > 3))
-      {
-        found = true; 
-        retour = 1;
-      }
-      //Si tout noir
-      if((voltage3 < 3)&&(voltage1 < 3))
-      {
-        found = true; 
-        retour = 0;
-      }
-    }
-    //Si les trois voix du blanc
-    else if ((voltage3 > 3)&&(voltage1 > 3))
-    {
-      //Tant qu'on voit blanc
-      while((voltage3 > 3)&&(voltage1 > 3)&&(voltage2 > 3))
-      {
-        voltage1 = analogRead(PIN_SUIVEUR1);
-        voltage2 = analogRead(PIN_SUIVEUR2);
-        voltage3 = analogRead(PIN_SUIVEUR3);
-
-        rotate(direct, i);
-        if(direct == 1){
-          direct = 0;
-        } else{
-          direct = 1;
-        }
-        i=i+2;
-        delay(10);
-      }
-    }
-    //Si droite voit noir, mais pas gauche et milieu
-    else if((voltage1 < 3)&&(voltage3 > 3)&&(voltage2 > 3))
-    {
-      //Torne à droite
-      rotate(0, 1);
-    }
-    //Si gauche voit noir, mais pas droite et milieu
-    else if((voltage3 < 3)&&(voltage1 > 3)&&(voltage2 > 3))
-    {
-      //Torne à gauche
-      rotate(1, 1);
-    }
-  }
-
-  return retour;*/
-
-   //Tourne à gauche.
-   // rotate(1,DEGAJUSTEMENT)
-
-  //int index = getTensionIndex(voltage1);
-  /*if(index == 5) {
-    found = true;
-  }
-  do{
-    //rotate(0,23);
-    //voltage = getLineValue();
-    //index = getTensionIndex(voltage);
-    Serial.println("===================1===================");
-        Serial.print("Tension: ");
-        //Serial.println(voltage);
-        Serial.print("Index: ");
-        //Serial.println(index);
-    if(index == 5) {
-      found = true;
-    }else 
-    {*/
-      /*int count = 0;
-      
-      while(count < 45 && !found) {
-        rotate(1,1);
-        voltage = getLineValue();
-        index = getTensionIndex(voltage);
-        if(index == 5) {
-          found = true;
-        }else {
-          count++;
-        }
-        if(count == 45) {
-          rotate(0,22);
-        }
-        */
-        
-        /*while(!found) {
-        //rotate(1,2);
-        voltage1 = getLineValue(PIN_SUIVEUR1);
-        voltage2 = getLineValue(PIN_SUIVEUR2);
-        voltage3 = getLineValue(PIN_SUIVEUR3);
-
-        //index = getTensionIndex(voltage);
-        Serial.println("===================2===================");
-        Serial.print("Tension: ");
-        //Serial.println(voltage);
-        Serial.print("Index: ");
-        //Serial.println(index);
-        if(index == 5)
-        {
-          found = true;
-        }
-        //Tourner à gauche 
-        if ((index == 1)||(index == 3))
-        {
-          rotate(1,DEGAJUSTEMENT);
-        }
-        //Tourner à doirte 
-        else if ((index == 4)||(index == 6))
-        {
-          rotate(0,DEGAJUSTEMENT);
-        }
-      }
-    }  
-  }while(!found);  */
 }
-
-int correct (int index) {
-  int erreur = 0;
-  
-  //Tourner à gauche 
-  if ((index == 1) || (index == 3))
-  {
-    rotate(1,DEGAJUSTEMENT);
-    erreur = 1;
-  }
-  //Tourner à droite 
-  else if ((index == 4) || (index == 6))
-  {
-    rotate(0,DEGAJUSTEMENT);
-    erreur = 1;
-  }
-  else if (index == 5)
-  {
-    erreur = 1;
-  }
-  else if (index == 7)
-  {
-    scan();
-  }
-  else
-  {
-    decelerate();
-    erreur = 0;
-  }
-
-  return erreur;
-  /*
-  switch (index)
-  {
-    case 0:case 7: decelerate(); return 0; break;
-    case 1:case 4: rotate(1,1); return 1; break;
-    case 3:case 6: rotate(0,1); return 1; break;
-  }
-  Serial.println("ALLO");
-  return 1;
-  */
-} 
 #endif
