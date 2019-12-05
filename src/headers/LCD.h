@@ -8,6 +8,7 @@ Librairie pour l'affichage de l'écran LCD.
 #define LCD_H_
 #include <string.h>
 #include <LiquidCrystal_I2C\LiquidCrystal_I2C.h>
+#include "headers/Servomoteur.h"
 
 LiquidCrystal_I2C lcd(0x27,16,2);
 #define MAX_TAILLE_TEXTE 17

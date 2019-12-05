@@ -77,9 +77,13 @@ void forward () {
   }
   MOTOR_SetSpeed(0, 0);
   MOTOR_SetSpeed(1, 0);
+  delay(10);
 }
 
 void backward (float distance) {
+  SERVO_Enable(MOTEURDROITE);
+  SERVO_Enable(MOTEURGAUCHE);
+  delay(100);
   ENCODER_Reset(0);
   ENCODER_Reset(1);
   bool accelerate = true;
@@ -105,9 +109,10 @@ void backward (float distance) {
 void decelerate () {
   ENCODER_Reset(0);
   ENCODER_Reset(1);
-
+  delay(10);
   MOTOR_SetSpeed(0, 0);
   MOTOR_SetSpeed(1, 0);
+  delay(10);
 }
 
 void pid(float currentSpeed) //reculons longue distance ca bug.
@@ -170,6 +175,7 @@ void turn (int side, int angle) {
   }
   MOTOR_SetSpeed(0, 0);
   MOTOR_SetSpeed(1, 0);
+  delay(10);
 }
 
 void rotate (int side, int angle) {
@@ -191,6 +197,7 @@ void rotate (int side, int angle) {
   }
   MOTOR_SetSpeed(0, 0);
   MOTOR_SetSpeed(1, 0);
+  delay(10);
 }
 
 void followLine() {

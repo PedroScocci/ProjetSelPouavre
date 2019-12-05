@@ -6,7 +6,6 @@ Librairie pour les boutons.
 */
 #include "LibRobus.h"
 #include "headers/LCD.h"
-#include "headers/Servomoteur.h"
 
 //Pin des boutons
 #define BOUTONROUGE A9  //30  Rouge

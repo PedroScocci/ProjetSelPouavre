@@ -40,6 +40,7 @@ void debutInfra(){
     //Vers la place devant le robot
     if(infra == Bouton1){
         followLine();
+        delay(100);
         debutBoutons();
         // DEVRAIT AVOIR FAIT UN 180
         rotate(1, 180);
@@ -53,6 +54,7 @@ void debutInfra(){
     else if(infra == Bouton2){
         rotate(1, 90);
         followLine();
+        delay(100);
         debutBoutons();
         // DEVRAIT AVOIR FAIT UN 180
         rotate(1,180);
@@ -66,6 +68,7 @@ void debutInfra(){
     else if(infra == Bouton3){
         rotate(1, 180);
         followLine();
+        delay(100);
         debutBoutons();
         delay(500);
         // DEVRAIT AVOIR FAIT UN 180
@@ -78,6 +81,7 @@ void debutInfra(){
     else if(infra == Bouton4){
         rotate(0, 90);
         followLine();
+        delay(100);
         debutBoutons();
         // DEVRAIT AVOIR FAIT UN 180
         rotate(1,180);
